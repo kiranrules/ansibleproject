@@ -1,6 +1,5 @@
 [endpoints]
-35.226.200.158 ansible_host=endpoint1
-34.68.233.190 ansible_host=endpoint2
+34.122.217.155
 [endpoints:vars]
-ansible_user = devops
-ansible_ssh_private_key_file = /home/devops/.ssh/id_rsa
+ansible_user = kpanchan
+ansible_ssh_private_key_file = /home/kpanchan/.ssh/id_rsa

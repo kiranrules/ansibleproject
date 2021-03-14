@@ -1,0 +1,11 @@
+Cmnd_Alias OPSIONS_COMMAND = /bin/su - ion,/bin/su - etrading,/bin/su etrading,/bin/su - fidev
+Cmnd_Alias OPSIONK_COMMAND = /bin/su - csvn,/bin/su csvn,/bin/su - ibondqa,\
+/bin/su - ibond_tc,/bin/su ibondqa,/opt/CollabNet_Subversion/bin/collabnetsvn-config,\
+/etc/init.d/collabnet_subversion,/opt/CollabNet_Subversion/bin/Configure-CollabNet_Subversion,\
+/etc/init.d/gmetad,/etc/init.d/gmond,/etc/init.d/httpd,/bin/su - etrading,\
+/bin/su etrading,/bin/su - ganglia
+Cmnd_Alias OPSIONP_COMMAND = /bin/su - etrading
+
+%opsions ALL=(ALL) NOPASSWD: OPSIONS_COMMAND
+%opsionk ALL=(ALL) NOPASSWD: OPSIONK_COMMAND
+%opsionp ALL=(ALL) NOPASSWD: OPSIONP_COMMAND

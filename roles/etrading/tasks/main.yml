@@ -1,0 +1,55 @@
+# tasks file for roles/etrading
+  - name: create/ensure group mkvgrp exists
+    group:
+      name: mkvgrp
+      state: present
+      gid: 1807
+
+  - name: create user account for etrading with uid 1833 and add it to mkvgrp group
+    user:
+      name: etrading
+      shell: /bin/bash
+      home: /app/etrading
+      create_home: true
+      password: password
+      group: mkvgrp
+      append: true
+      uid: 1833
+
+  - name: copy sudoers template after validation with visudo
+    template:
+      src: templates/sudoers_master
+      dest: /etc/sudoers.d
+      owner: root
+      validate: /usr/sbin/visudo -csf %s
+
+  #- name: update master sudoers file with the correct includedir
+  #  lineinfile:
+  #    path: /etc/sudoers
+  #   regexp: '^#includedir /etc/sudoers.d'
+  #    insertafter: '*regex*'
+  #    line: "#include /etc/sudoers.d/sudoers_master"
+  #    state: present
+
+  - name: Setup crontab entries at reboot of server
+    cron:
+      name: "Run this job at the time of reboot"
+      special_time: reboot
+      job: "sleep 30;/apps/etrading/scripts/startUpScripts/startDaemon.sh /apps/etrading/mkv/daemon/DS_{{ ansible_fqdn }}/ > /dev/null 2>&1"
+  
+  - name: Create/Check if the respective directories exists
+    file:
+      path: "{{ item }}"
+      state: directory
+    loop:
+      - /apps/etrading/mkv
+      - /apps/etrading/mkv/daemon
+      - /apps/etrading/mkv/rundir
+      - /apps/etrading/mkv/bin
+      - /apps/etrading/scripts/startUpScripts
+      - /apps/etrading/mkv/daemon/jbinlib
+
+  - name: Create the file for daily clean up tasks
+    file:
+      path: /apps/etrading/scripts/dailyClean.sh
+      state: touch
