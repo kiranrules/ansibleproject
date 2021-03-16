@@ -47,7 +47,7 @@
       - /apps/etrading/mkv/rundir
       - /apps/etrading/mkv/bin
       - /apps/etrading/scripts/startUpScripts
-      - /apps/etrading/mkv/daemon/jbinlib
+      - /apps/etrading/mkv/jbinlib
 
   - name: Create the file for daily clean up tasks
     file:

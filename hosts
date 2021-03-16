@@ -1,5 +1,14 @@
-[endpoints]
-34.122.217.155
-[endpoints:vars]
+[prod]
+ionr1p.jc.jefco.com ansible_host=34.121.57.61
+ionr2p.jc.jefco.com ansible_host=34.71.98.193
+ionr3p.jc.jefco.com ansible_host=35.184.18.167
+
+[dr]
+ionr1dr.ct.jefco.com ansible_host=35.243.249.131
+ionr2dr.ct.jefco.com ansible_host=34.75.142.195
+ionr3dr.ct.jefco.com ansible_host=35.192.125.38
+
+
+[all:vars]
 ansible_user = kpanchan
 ansible_ssh_private_key_file = /home/kpanchan/.ssh/id_rsa
